@@ -8,7 +8,7 @@ import { Todos } from "./pages/Todos";
 const App = () => {
   return(
     <>
-    <Routes>
+    <Routes >
     <Route path="/" element={<DefaultLayout/>}>
       <Route path="/" index element={<Home/>}></Route>
       <Route path="/posts" element={<Posts/>}></Route>
