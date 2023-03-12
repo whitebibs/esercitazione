@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { DefaultLayout } from "./layout/DefaultLayout";
-import { Home } from "./pages/Home";
-import { Posts } from "./pages/Posts";
-import { Todos } from "./pages/Todos";
+import { Home } from "./layout/pages/Home";
+import { Posts } from "./layout/pages/Posts";
+import { Todos } from "./layout/pages/Todos";
 
 
 const App = () => {
