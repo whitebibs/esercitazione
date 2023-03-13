@@ -29,14 +29,14 @@ export const Posts = () => {
       setCurrentPage(currentPage + Number(step));
     }
   };
-  const handleDelete = (e) => {
+ /*  const handleDelete = (e) => {
     const deletedID = Number(e.target.dataset.id);
     const deletedIndex = currentPosts.findIndex(item => {
         return item.id === deletedID
     });
   currentPosts.splice(deletedIndex, 1)
 
-  } 
+  }  */
   const postsList = currentPosts.map((post) => (
     <li
       key={post.id}
@@ -46,8 +46,8 @@ export const Posts = () => {
       <h4 className="mb-1 text-lg text-blue-600">{post.title}</h4>
       <p className="text-sm">{post.body}</p>
       </div>
-      <button onClick={handleDelete} data-id={post.id}
-       className="bg-red-500 hover:bg-red-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">DELETE</button>
+     {/*  <button onClick={handleDelete} data-id={post.id}
+       className="bg-red-500 hover:bg-red-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">DELETE</button> */}
     </li>
   ));
 
