@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Constants } from "../../constants";
 import useAxios from "../../hooks/useAxios";
 const { BASE_API_URL } = Constants;
@@ -7,7 +7,6 @@ export const Posts = () => {
   const [data, error, loading, updateData] = useAxios(`${BASE_API_URL}/posts`);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostPerPage] = useState(10);
-  const [post, setPost] = useState([]);
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const maximumPages = Math.ceil(data.length / postsPerPage);
@@ -19,17 +18,6 @@ export const Posts = () => {
   if (loading) {
     return <h3>Loading...</h3>;
   }
-
-  const postsList = currentPosts.map((post) => (
-    <li
-      key={post.id}
-      className=" border-solid border-2 border-blue-300 p-3 m-2"
-    >
-      <h4 className="mb-1 text-lg text-blue-600">{post.title}</h4>
-      <p className="text-sm">{post.body}</p>
-    </li>
-  ));
-
   const handleClick = (e) => {
     const { step } = e.target.dataset;
     console.log(typeof step);
@@ -41,6 +29,30 @@ export const Posts = () => {
       setCurrentPage(currentPage + Number(step));
     }
   };
+  const handleDelete = (e) => {
+    const deletedID = Number(e.target.dataset.id);
+    const deletedIndex = currentPosts.findIndex(item => {
+        return item.id === deletedID
+    });
+  currentPosts.splice(deletedIndex, 1)
+
+  } 
+  const postsList = currentPosts.map((post) => (
+    <li
+      key={post.id}
+      className=" border-solid border-2 border-blue-300 p-3 m-2 flex justify-between"
+    >
+     <div>
+      <h4 className="mb-1 text-lg text-blue-600">{post.title}</h4>
+      <p className="text-sm">{post.body}</p>
+      </div>
+      <button onClick={handleDelete} data-id={post.id}
+       className="bg-red-500 hover:bg-red-700 px-5 py-2 text-sm leading-5 rounded-full font-semibold text-white">DELETE</button>
+    </li>
+  ));
+
+
+
 
   return (
     <>
